@@ -24,8 +24,15 @@ var elem3 = "<h1> hi3 </h1>"
 tweetsElement.innerHTML = elem1 + elem2 + elem3
  {% endcomment %}
 
+function LikeBtn(){
+    return "<button class='btn btn-primary'>Like</button>"
+}
+
+
 function formatTweetElement(tweet){
-    var formattedTweet = "<div class='mb-5 tweet' id ='tweet'>" + tweet.id   + "<p>" + tweet.content + "</p></div>" 
+    var formattedTweet = "<div class='mb-5 tweet' id ='tweet-" + tweet.id + "'><p>" + tweet.content + 
+    LikeBtn()+ 
+    "</p></div>" 
     return formattedTweet 
 }
 
