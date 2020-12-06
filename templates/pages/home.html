@@ -24,7 +24,10 @@ var elem3 = "<h1> hi3 </h1>"
 tweetsElement.innerHTML = elem1 + elem2 + elem3
  {% endcomment %}
 
-
+function formatTweetElement(tweet){
+    var formattedTweet = "<div class='mb-5 tweet' id ='tweet'>" + tweet.id   + "<p>" + tweet.content + "</p></div>" 
+    return formattedTweet 
+}
 
 const xhr = new XMLHttpRequest()
 const method = 'GET'  //"POST"
@@ -39,9 +42,11 @@ xhr.onload = function() {
     var finalTweetStr = ""
     var i;
     for(i = 0; i<ListItems.length;i++){
-        console.log(i)
-        console.log(ListItems[i])
-        var currentItem = "<div class='mb-1'><h4>" + ListItems[i].id + "</h4>" + "<p>" + ListItems[i].content + "</p></div>"
+       
+
+        var tweetObj = ListItems[i]
+
+        var currentItem =  formatTweetElement(tweetObj )
         finalTweetStr += currentItem
 
     }
