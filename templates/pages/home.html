@@ -3,6 +3,28 @@
 {% block head_title%}
  home
 {% endblock head_title%}
-  {% block content %}
-   hi every one.
-   {% endblock content %}
+{% block content %}
+
+<h1> Hello world <h1>
+<div>
+
+
+</div>
+<script>
+const xhr = new XMLHttpRequest()
+const method = 'GET'  //"POST"
+const url = "/tweets"
+const responseType = "json"
+xhr.responseType = responseType
+
+xhr.open(method,   url)
+xhr.onload = function() {
+    const serverResponse = xhr.response
+    var ListItems = serverResponse.response
+    console.log(ListItems)
+    //console.log(xhr.response)
+}
+xhr.send()
+</script>
+
+{% endblock content %}
