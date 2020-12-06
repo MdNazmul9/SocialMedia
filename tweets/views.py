@@ -6,7 +6,7 @@ from .models import Tweet
 
 def home_view(request, *args, **kwargs):
     #print(args, kwargs)
-    return HttpResponse("<h1>Hello world <h1>")
+    return render(request, "pages/home.html", context={}, status=200)
 
 def home_Detail_view(request, tweet_id, *args, **kwargs):
     #print(args, kwargs)
