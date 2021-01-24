@@ -5,12 +5,20 @@
 {% endblock head_title%}
 {% block content %}
 
-<h1> Hello world <h1>
-<div id= "tweets">
+<div class="row text-center">
+    <div class="col">
+        <h1> Welcome to Tweetme 2</h1>
+    </div>
+</div>
+
+
+
+<div class='row' id='tweets'>
 Replace me
 </div>
 
 
+    
 
 
 <script>
@@ -19,7 +27,7 @@ tweetsElement.innerHTML = 'Loading...'
 
 
 {% comment %} 
-var elem2 = "<h1> hi2 </h1>"
+var elem2 = "<h1> hi2 </h1>"   
 var elem3 = "<h1> hi3 </h1>"
 tweetsElement.innerHTML = elem1 + elem2 + elem3
  {% endcomment %}
@@ -29,14 +37,13 @@ function handleDidLike(tweet_id,currentCount){
 
 }
 
-
 function LikeBtn(tweet){
     return "<button class='btn btn-primary btn-sm' onClick=handleDidLike("+tweet.id+","+tweet.likes+")>"+tweet.likes+ ' '+"Likes</button>"
 }
 
 
 function formatTweetElement(tweet){
-     var formattedTweet = "<div class='mb-4 tweet' id ='tweet-"+tweet.id+"'> <p style='font-size:16px'>" + tweet.content +
+     var formattedTweet = "<div class='col-12 col-md-10 max-auto border-top border-bottom py-3 mb-4 tweet' id ='tweet-"+tweet.id+"'> <p style='font-size:16px'>" + tweet.content +
      "</p><div class='btn-group'>"
         + LikeBtn(tweet) +
         "</div></div>"
@@ -44,8 +51,8 @@ function formatTweetElement(tweet){
 }
 
 const xhr = new XMLHttpRequest()
-const method = 'GET'  //"POST"
-const url = "/tweets"
+const method = 'GET'  //"POST"         
+const url = "/tweets"   
 const responseType = "json"
 xhr.responseType = responseType
 

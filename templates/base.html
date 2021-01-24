@@ -7,16 +7,24 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+    <style>
+      .bg-tweetme {
+    background-color: #ffc107!important;
+    }
+    </style>
     <title>{% block head_title %}
     
     {% endblock head_title %}</title>
   </head>
   <body>
-    <p>Hello, world!</p>
-    {% block content %}
+    {% include "components/navbar.html" %}
+    <!-- <p>Hello, world!</p> -->
+    <div class="container-fluid">
+      {% block content %}
     
-    {% endblock content %}
+      {% endblock content %}
+    </div>
+   
 
    {% comment "cmt" %}
     DRY === Don't Try Repeat
