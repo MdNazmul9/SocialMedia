@@ -25,7 +25,7 @@ SECRET_KEY = '0=*-xleeslo%_n8ha9kx$r!f2mcmn#=t_^@*_d3_^q6on23$lp'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', '.ehsanmarketing.com']
 
 
 # Application definition
