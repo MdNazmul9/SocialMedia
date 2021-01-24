@@ -44,6 +44,7 @@ function handleTweetCreateFormDidSubmit(event){
     const xhr = new XMLHttpRequest()
 
     xhr.open(method,url)
+    
     xhr.onload = function() {
         const serverResponse = xhr.response
         //console.log(serverResponse)

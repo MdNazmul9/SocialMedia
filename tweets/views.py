@@ -18,11 +18,11 @@ def home_view(request, *args, **kwargs):
     return render(request, "pages/home.html", context={}, status=200)
     
 def tweet_create_view(request, *args, **kwargs):
+    print("Ajax request:",request.is_ajax())
     form = TweetForm(request.POST or None)
     #print("Post data is:",request.POST)
     next_url = request.POST.get('next')
-    print("Next url:", next_url)
-
+    
     if form.is_valid():
         obj = form.save(commit=False)
         # Do other form related logic
