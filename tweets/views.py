@@ -6,17 +6,27 @@ from django.shortcuts import render
 from django.http import HttpResponse, Http404, JsonResponse
 from .models import Tweet
 from .forms import TweetForm
+from django.http import HttpResponse, Http404, JsonResponse
+from django.shortcuts import redirect
 
 def home_view(request, *args, **kwargs):
     #print(args, kwargs)
     return render(request, "pages/home.html", context={}, status=200)
-
-
+    
 def tweet_create_view(request, *args, **kwargs):
     form = TweetForm(request.POST or None)
+    #print("Post data is:",request.POST)
+    next_url = request.POST.get('next')
+    print("Next url:", next_url)
+
     if form.is_valid():
         obj = form.save(commit=False)
+        # Do other form related logic
         obj.save()
+        
+
+        if next_url != None:
+            return redirect(next_url)
 
         form = TweetForm()
 

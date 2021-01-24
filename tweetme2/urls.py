@@ -28,7 +28,7 @@ urlpatterns = [
     #path('',include(tweets.urls)),
     path('',home_view),
     #path('abc/',home_view),
-    path('tweets',Tweet_LIstView),
+    path('tweets/',Tweet_LIstView),
     path('create-tweet/',tweet_create_view),
     path('tweets/<int:tweet_id>',home_Detail_view),
 ]
