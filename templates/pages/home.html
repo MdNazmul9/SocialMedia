@@ -35,8 +35,26 @@
 
 function handleTweetCreateFormDidSubmit(event){
 
+
     event.preventDefault()
-    console.log(event)
+    const myForm = event.target
+    const myFormData = new FormData(myForm) 
+    const url = myForm.getAttribute("action")
+    const method = myForm.getAttribute("method")
+    const xhr = new XMLHttpRequest()
+
+    xhr.open(method,url)
+    xhr.onload = function() {
+        const serverResponse = xhr.response
+        //console.log(serverResponse)
+        const tweetsEl = document.getElementById("tweets")
+        loadTweets(tweetsEl)
+
+    }
+    xhr.send(myFormData)
+
+   
+    
 }
 
 
@@ -87,11 +105,13 @@ function LikeBtn(tweet){
 
 
 function formatTweetElement(tweet){
-     var formattedTweet = "<div class='col-12 col-md-10 max-auto border-top border-bottom py-3 mb-4 tweet' id ='tweet-"+tweet.id+"'> <p style='font-size:16px'>" + tweet.content +
+    var formattedTweet = "<div class='col-10 col-md-10 max-auto border-top border-bottom py-3 mb-4 tweet' id ='tweet-"+tweet.id+"'> <p style='font-size:16px'>" + tweet.content +
+    //var formattedTweet = "<div class='col-md-4 mx-auto col-10 border-top border-bottom py-3 mb-4 tweet' id ='tweet-"+tweet.id+"'> <p style='font-size:16px'>" + tweet.content +
+     
      "</p><div class='btn-group'>"
         + LikeBtn(tweet) +
         "</div></div>"
-    return formattedTweet 
+    return formattedTweet  
 }
 
 </script>
