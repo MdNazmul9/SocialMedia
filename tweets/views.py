@@ -15,6 +15,7 @@ from django.utils.http import is_safe_url
 
 def home_view(request, *args, **kwargs):
     #print(args, kwargs)
+    print(request.user)
     return render(request, "pages/home.html", context={}, status=200)
     
 def tweet_create_view(request, *args, **kwargs):

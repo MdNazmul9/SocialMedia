@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['127.0.0.1', '.ehsanmarketing.com']
 # Application definition
 
 INSTALLED_APPS = [
+    'tweets',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     #Local App
-    'tweets',
+    
 ]
 
 MIDDLEWARE = [

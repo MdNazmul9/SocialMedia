@@ -71,7 +71,7 @@ function handleTweetCreateFormDidSubmit(event){
     
     xhr.onload = function() {
         if (xhr.status === 201){
-            handleTweetFormError("", false)
+            handleTweetFormError("", false) 
             const newTweetJson = xhr.response
             //console.log(newTweetJson.likes)
             const newTweetElement = formatTweetElement(newTweetJson)
