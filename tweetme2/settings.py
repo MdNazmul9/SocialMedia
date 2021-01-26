@@ -124,6 +124,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+TWEET_MAX_LENTG = 240
+
 LOGIN_URL = '/login'
 
 STATIC_URL = '/static/'

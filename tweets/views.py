@@ -9,18 +9,35 @@ from .forms import TweetForm
 from django.http import HttpResponse, Http404, JsonResponse
 from django.shortcuts import redirect
 
+from .serializers import TweetSerializer
+
 from django.conf import settings
 ALLOWED_HOSTS  = settings.ALLOWED_HOSTS 
 from django.utils.http import is_safe_url
 
 def home_view(request, *args, **kwargs):
     #print(args, kwargs)
-    print(request.user or None)
+    #print(request.user or None)
     return render(request, "pages/home.html", context={}, status=200)
-    
-def tweet_create_view(request, *args, **kwargs):
-    user = request.user
 
+def tweet_create_view(request, *args, **kwargs):
+    serializer = TweetSerializer(data=request.POST or None)
+    #print(serializer)
+    if serializer.is_valid():
+        obj = serializer.save(user=request.user)
+        #print(obj)
+        return JsonResponse(serializer.data, status=201)
+    return JsonResponse({}, status=400)
+
+
+def tweet_create_view_pure_django(request, *args, **kwargs):
+
+    '''
+    REST API Create View -> DRF
+
+    '''
+
+    user = request.user
     if not request.user.is_authenticated:
         user = None  ## None for AnonymousUser
         if request.is_ajax():
