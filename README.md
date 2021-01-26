@@ -4,6 +4,23 @@
 # $ pipenv shell
 # $ django-admin startproject Project_name .
 # $ py manage.py runserver
+'''
+from tweets.models import Tweet
+qs = Tweet.objects.filter(content="abc")
+# qs = Tweet.objects.filter(user="abc") # err
+qs = Tweet.objects.filter(user=1) 
+qs = Tweet.objects.filter(user__username=1) # []
+qs = Tweet.objects.filter(user__username="mn48")
+
+qs = Tweet.objects.filter(user__username="mn48") #user===foreignkey; username===foreigntable columnName;
+# foreignkey use kore onno table column search
+qs = Tweet.objects.filter(user__username__iexact="mn48")
+
+
+qs = Tweet.objects.filter(content__iexact="abc")
+
+
+'''
 
 
 '''
@@ -39,5 +56,7 @@
 2:33:33 30. Append New Tweet & Reorder
 2:37:09 31. Handling Form Errors
 2:42:18 32. Rendering the Error Message via Vanilla JavaScript
-
+2:49:28 33. Users & Tweets
+2:57:09 34. Django Admin
+3:07:23 35. Associate Authenticated User to Object
 '''
