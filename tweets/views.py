@@ -1,33 +1,59 @@
 
 import random
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 # Create your views here.
 
 from django.http import HttpResponse, Http404, JsonResponse
 from .models import Tweet
 from .forms import TweetForm
 from django.http import HttpResponse, Http404, JsonResponse
-from django.shortcuts import redirect
 
 from .serializers import TweetSerializer
-
 from django.conf import settings
 ALLOWED_HOSTS  = settings.ALLOWED_HOSTS 
 from django.utils.http import is_safe_url
+
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
 
 def home_view(request, *args, **kwargs):
     #print(args, kwargs)
     #print(request.user or None)
     return render(request, "pages/home.html", context={}, status=200)
 
+
+@api_view(['POST']) # http method the client== POST
 def tweet_create_view(request, *args, **kwargs):
-    serializer = TweetSerializer(data=request.POST or None)
+    serializer = TweetSerializer(data=request.POST)
     #print(serializer)
-    if serializer.is_valid():
+    if serializer.is_valid(raise_exception=True):
         obj = serializer.save(user=request.user)
         #print(obj)
-        return JsonResponse(serializer.data, status=201)
-    return JsonResponse({}, status=400)
+        return Response(serializer.data, status=201)
+    return Response({}, status=400)
+
+
+@api_view(['GET']) # http method the client== POST
+def home_Detail_view(request, tweet_id, *args, **kwargs):
+    qs = Tweet.objects.filter(id=tweet_id)
+    if not qs.exists():
+        return Response({}, status=404)
+
+    obj = qs.first()
+    serializer = TweetSerializer(obj)
+    return Response(serializer.data, status=200)
+
+
+@api_view(['GET']) # http method the client== POST
+def Tweet_LIstView(request, *args, **kwargs):
+    qs = Tweet.objects.all()
+    serializer = TweetSerializer(qs, many=True)
+    return Response(serializer.data)
+
+
+
+
 
 
 def tweet_create_view_pure_django(request, *args, **kwargs):
@@ -35,7 +61,7 @@ def tweet_create_view_pure_django(request, *args, **kwargs):
     '''
     REST API Create View -> DRF
 
-    '''
+    ''' 
 
     user = request.user
     if not request.user.is_authenticated:
@@ -69,7 +95,7 @@ def tweet_create_view_pure_django(request, *args, **kwargs):
 
 
 
-def Tweet_LIstView (request, *args, **kwargs):
+def Tweet_LIstView_pure_django(request, *args, **kwargs):
     qs = Tweet.objects.all()
     #tweets_list = [{"id":x.id, "content":x.content, "likes":random.randint(0,1000)} for x in qs]
     tweets_list = [x.serialize() for x in qs]
@@ -85,7 +111,7 @@ def Tweet_LIstView (request, *args, **kwargs):
 
 
 
-def home_Detail_view(request, tweet_id, *args, **kwargs):
+def home_Detail_view_pure_django(request, tweet_id, *args, **kwargs):
     #print(args, kwargs)
     '''
 
