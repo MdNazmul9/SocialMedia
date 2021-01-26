@@ -59,4 +59,6 @@ qs = Tweet.objects.filter(content__iexact="abc")
 2:49:28 33. Users & Tweets
 2:57:09 34. Django Admin
 3:07:23 35. Associate Authenticated User to Object
+3:13:00 36. Permissions & Roadmap
+
 '''

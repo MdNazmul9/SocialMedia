@@ -15,10 +15,17 @@ from django.utils.http import is_safe_url
 
 def home_view(request, *args, **kwargs):
     #print(args, kwargs)
-    print(request.user)
+    print(request.user or None)
     return render(request, "pages/home.html", context={}, status=200)
     
 def tweet_create_view(request, *args, **kwargs):
+    user = request.user
+
+    if not request.user.is_authenticated:
+        user = None  ## None for AnonymousUser
+        if request.is_ajax():
+            return JsonResponse({}, status=401)
+        return redirect(settings.LOGIN_URL)
     print("Ajax request:",request.is_ajax())
     form = TweetForm(request.POST or None)
     #print("Post data is:",request.POST)
@@ -27,6 +34,9 @@ def tweet_create_view(request, *args, **kwargs):
     if form.is_valid():
         obj = form.save(commit=False)
         # Do other form related logic
+        obj.user = user 
+
+
         obj.save()
         if request.is_ajax():
             return JsonResponse(obj.serialize(), status=201) # 201 for created items
