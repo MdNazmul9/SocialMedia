@@ -31,15 +31,18 @@ ALLOWED_HOSTS = ['127.0.0.1', '.ehsanmarketing.com']
 # Application definition
 
 INSTALLED_APPS = [
-    'tweets',
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 3rd party API
+    'rest_framework',
 
     #Local App
+    'tweets',
     
 ]
 

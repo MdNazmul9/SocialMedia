@@ -60,5 +60,7 @@ qs = Tweet.objects.filter(content__iexact="abc")
 2:57:09 34. Django Admin
 3:07:23 35. Associate Authenticated User to Object
 3:13:00 36. Permissions & Roadmap
+3:16:16 37. Install Django Rest Framework
+3:18:20 38. Django Forms to Django Rest Framework Serializer
 
 '''
