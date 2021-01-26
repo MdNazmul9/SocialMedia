@@ -13,7 +13,8 @@ from django.conf import settings
 ALLOWED_HOSTS  = settings.ALLOWED_HOSTS 
 from django.utils.http import is_safe_url
 
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 
@@ -24,6 +25,7 @@ def home_view(request, *args, **kwargs):
 
 
 @api_view(['POST']) # http method the client== POST
+@permission_classes([IsAuthenticated])
 def tweet_create_view(request, *args, **kwargs):
     serializer = TweetSerializer(data=request.POST)
     #print(serializer)

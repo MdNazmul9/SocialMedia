@@ -63,5 +63,7 @@ qs = Tweet.objects.filter(content__iexact="abc")
 3:16:16 37. Install Django Rest Framework
 3:18:20 38. Django Forms to Django Rest Framework Serializer
 3:27:42 39. Django Views to Django Rest Framework Views
+3:35:50 40. Permissions and Authentication Classes Decorators for DRF APIs
+
 
 '''
