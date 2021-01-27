@@ -8,7 +8,7 @@ from .models import Tweet
 from .forms import TweetForm
 from django.http import HttpResponse, Http404, JsonResponse
 
-from .serializers import TweetSerializer
+from .serializers import TweetSerializer, TweetActionSerializer
 from django.conf import settings
 ALLOWED_HOSTS  = settings.ALLOWED_HOSTS 
 from django.utils.http import is_safe_url
@@ -48,7 +48,7 @@ def tweet_Detail_view(request, tweet_id, *args, **kwargs):
 
 
 
-@api_view(['delete', 'POST']) # http method the client== POST
+@api_view(['DELETE', 'POST']) # http method the client== POST
 @permission_classes([IsAuthenticated])
 def tweet_delete_view(request, tweet_id, *args, **kwargs):
     qs = Tweet.objects.filter(id=tweet_id)
@@ -64,6 +64,38 @@ def tweet_delete_view(request, tweet_id, *args, **kwargs):
     return Response({"message":"Tweet removed successfully!"}, status=200)
 
 
+@api_view(['POST']) # http method the client== POST
+@permission_classes([IsAuthenticated])
+def tweet_action_view(request, tweet_id, *args, **kwargs):
+    '''
+    id is required.
+    Action options are like, unlike, rewrite
+    '''
+    serializer = TweetActionSerializer(data=request.POST) 
+    if serializer.is_valid(raise_exception=True):
+        data = serializer.validate_data
+        tweet_id = data.get("id")
+        action = data.get("action")
+        qs = Tweet.objects.filter(id=tweet_id)
+        if not qs.exists():
+            return Response({}, status=404)
+
+        if not qs.exists():
+            return Response({"message":"You can't Delete this tweet!"}, status=401)
+        
+        qs = Tweet.objects.filter(user=request.user)
+        obj = qs.first()
+        if action == "like":
+             obj.likes.add(request.user)
+        elif action == "unlike":
+             obj.likes.remove(request.user)
+
+        elif action == "retweet":
+             pass       
+
+    return Response({"message":"Tweet removed successfully!"}, status=200)
+
+
 
 @api_view(['GET']) # http method the client== POST
 def Tweet_LIstView(request, *args, **kwargs):
@@ -72,17 +104,10 @@ def Tweet_LIstView(request, *args, **kwargs):
     return Response(serializer.data)
 
 
-
-
-
-
 def tweet_create_view_pure_django(request, *args, **kwargs):
-
     '''
     REST API Create View -> DRF
-
     ''' 
-
     user = request.user
     if not request.user.is_authenticated:
         user = None  ## None for AnonymousUser
@@ -126,25 +151,16 @@ def Tweet_LIstView_pure_django(request, *args, **kwargs):
     }
     return JsonResponse(data)
 
-
-
-
-
-
 def home_Detail_view_pure_django(request, tweet_id, *args, **kwargs):
     #print(args, kwargs)
     '''
-
     REST API VIEW
     Consume by Javascript or Swift /java/iOS/Android
     return json data
-
     '''
-    
     data = {
 
         "id": tweet_id,
-      
     }
 
     status = 200

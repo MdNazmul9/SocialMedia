@@ -67,3 +67,49 @@ qs = Tweet.objects.filter(content__iexact="abc")
 
 
 '''
+
+# Many To Many Field
+
+'''
+from tweets.models import Tweet, TweetLike
+
+TweetLike.objects.all()
+
+Tweet.objects.all()
+
+obj = Tweet.objects.first()
+
+ obj.likes.all()
+
+# Admin 
+from django.contrib.auth import get_user_model
+User = get_user_model()
+User.objects.all()
+
+me = User.objects.first()
+obj.likes.add(me)
+obj.likes.all()
+obj.likes.remove(me)
+
+qs = User.objects.all()
+obj.likes.set(qs)
+obj.likes.all()
+TweetLike.objects.all()
+# Veri important
+
+TweetLike.objects.create(user=me, tweet=obj)
+# summary
+obj.likes.add()
+obj.likes.remove()
+obj.likes.set() # requires a query set
+TweetLike.objects(user= , tweet= )
+obj.likes.add(me)
+obj.likes.all()
+# empty users
+empty_user = User.objects.none()
+
+
+
+
+
+'''
