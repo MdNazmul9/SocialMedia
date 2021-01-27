@@ -1,6 +1,6 @@
 from django.conf import settings
 from rest_framework import serializers
-from .models import Tweet
+from .models import Tweet, TweetLike
 
 TWEET_MAX_LENTG = settings.TWEET_MAX_LENTG
 

@@ -28,9 +28,6 @@ DEBUG = True
 ALLOWED_HOSTS = ['127.0.0.1', '.ehsanmarketing.com']
 
 
-TWEET_MAX_LENTG = 240
-LOGIN_URL = '/login'
-TWEET_ACTION_OPTIONS = ["like", "unlike", "rewrite"]
 
 # Application definition
 
@@ -128,6 +125,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+TWEET_MAX_LENTG = 240
+LOGIN_URL = '/login'
+TWEET_ACTION_OPTIONS = ["like", "unlike", "rewrite"]
 
 STATIC_URL = '/static/'
 
