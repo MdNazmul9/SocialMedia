@@ -37,7 +37,7 @@ def tweet_create_view(request, *args, **kwargs):
 
 
 @api_view(['GET']) # http method the client== POST
-def home_Detail_view(request, tweet_id, *args, **kwargs):
+def tweet_Detail_view(request, tweet_id, *args, **kwargs):
     qs = Tweet.objects.filter(id=tweet_id)
     if not qs.exists():
         return Response({}, status=404)
@@ -45,6 +45,24 @@ def home_Detail_view(request, tweet_id, *args, **kwargs):
     obj = qs.first()
     serializer = TweetSerializer(obj)
     return Response(serializer.data, status=200)
+
+
+
+@api_view(['delete', 'POST']) # http method the client== POST
+@permission_classes([IsAuthenticated])
+def tweet_delete_view(request, tweet_id, *args, **kwargs):
+    qs = Tweet.objects.filter(id=tweet_id)
+    if not qs.exists():
+        return Response({}, status=404)
+
+    if not qs.exists():
+        return Response({"message":"You can't Delete this tweet!"}, status=401)
+    
+    qs = Tweet.objects.filter(user=request.user)
+    obj = qs.first()
+    obj.delete()
+    return Response({"message":"Tweet removed successfully!"}, status=200)
+
 
 
 @api_view(['GET']) # http method the client== POST

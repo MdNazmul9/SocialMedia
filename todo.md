@@ -5,7 +5,7 @@
             -> Image -> Media Storage Server
         -> Deleting
         -> Rewriting
-        -> Liking
+        -> Liking or Unliking
 
 2. Users
     -> Register
