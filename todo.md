@@ -3,9 +3,11 @@
         -> Creating
             -> Text
             -> Image -> Media Storage Server
-        -> Deleting
-        -> Rewriting
-        -> Liking
+        -> Delete
+        -> Retweeting
+            -> Read only serializer
+            -> Create only serializer
+        -> Liking or Unliking
 
 2. Users
     -> Register
@@ -15,15 +17,15 @@
         -> Image?
         -> Text?
         -> Follow Button
-
     -> Feed
         -> User's feed only?
         -> User + who they follow?
 
-
-
 3. Following / Followers
 
-Long term todos
- - Noptifications
- - DM (Direct Message)
+
+Next Steps:
+- Large File Uploads for Images ~ Dive into AWS
+- Notifications
+- Direct Messages / Private Inboxes ~ Chat x Channels
+- Explore -> parse & filter for hashtags
