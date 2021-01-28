@@ -6,10 +6,15 @@ verify_ssl = true
 [packages]
 django = "==2.2"
 djangorestframework = "*"
+<<<<<<< HEAD
 django-cors-headers = "*"
 
 [requires]
 python_version = "3.6"
+=======
+markdown = "*"
+django-filter = "*"
+>>>>>>> bb8adc725cc29a5ab85a0d2219a704e0efe8bd24
 
 [dev-packages]
 pylint = "*"

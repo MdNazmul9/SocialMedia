@@ -56,6 +56,24 @@ function getCookie(name) {
 
 
 
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+
 function handleTweetFormError(msg, display){
     var myErrorDiv = document.getElementById("tweet-create-form-error")
     if (display === true) {
@@ -173,6 +191,32 @@ function handleTweetActionBtn(tweet_id, currentCount, action) {
     return 
 }
 
+<<<<<<< HEAD
+=======
+function handleTweetActionBtn(tweet_id, currentCount, action) {
+    console.log(tweet_id, currentCount)
+    const url = "/api/tweets/action"
+    const method="POST"
+    const data = JSON.stringify({
+        id: tweet_id,
+        action: action
+    })
+    const xhr = new XMLHttpRequest()
+    const csrftoken = getCookie('csrftoken');
+    xhr.open(method, url)
+    xhr.setRequestHeader("Content-Type", "application/json")
+    xhr.setRequestHeader("HTTP_X_REQUESTED_WITH", "XMLHttpRequest")
+    xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest")
+    xhr.setRequestHeader("X-CSRFToken", csrftoken)
+    xhr.onload = function() {
+        // react.js this handle the state much better
+        loadTweets(tweetsContainerElement)
+    }
+    xhr.send(data)
+    return 
+}
+
+>>>>>>> bb8adc725cc29a5ab85a0d2219a704e0efe8bd24
 
 function RetweetBtn(tweet) {
     return "<button class='btn btn-outline-success btn-sm' onclick=handleTweetActionBtn(" + 

@@ -32,6 +32,7 @@ LOGIN_URL = "/login"
 MAX_TWEET_LENGTH = 240
 TWEET_ACTION_OPTIONS = ["like", "unlike", "retweet"]
 
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -129,6 +130,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+<<<<<<< HEAD
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
@@ -139,6 +141,13 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static-root")
 
 CORS_ORIGIN_ALLOW_ALL = True # any website has access to my api
 CORS_URLS_REGEX = r'^/api/.*$'
+=======
+TWEET_MAX_LENTG = 240
+LOGIN_URL = '/login'
+TWEET_ACTION_OPTIONS = ["like", "unlike", "rewrite"]
+
+STATIC_URL = '/static/'
+>>>>>>> bb8adc725cc29a5ab85a0d2219a704e0efe8bd24
 
 
 DEFAULT_RENDERER_CLASSES = [

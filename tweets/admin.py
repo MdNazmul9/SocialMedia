@@ -3,8 +3,12 @@ from django.contrib import admin
 # Register your models here.
 from .models import Tweet, TweetLike
 
+<<<<<<< HEAD
 
 class TweetLikeAdmin(admin.TabularInline):
+=======
+class  TweetLikeAdmin(admin.TabularInline):
+>>>>>>> bb8adc725cc29a5ab85a0d2219a704e0efe8bd24
     model = TweetLike
 
 class TweetAdmin(admin.ModelAdmin):

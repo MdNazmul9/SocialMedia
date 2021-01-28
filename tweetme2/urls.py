@@ -26,14 +26,25 @@ from accounts.views import (
 )
 
 from tweets.views import (
+<<<<<<< HEAD
     home_view,
     tweets_list_view,
     tweets_detail_view,
+=======
+    home_view, 
+    tweet_action_view,
+    tweet_delete_view,
+    tweet_Detail_view, 
+    Tweet_LIstView,
+    tweet_create_view,
+    
+>>>>>>> bb8adc725cc29a5ab85a0d2219a704e0efe8bd24
 )
 
 urlpatterns = [
     path('', home_view),
     path('admin/', admin.site.urls),
+<<<<<<< HEAD
     path('global/', tweets_list_view),
     path('login/', login_view),
     path('logout/', logout_view),
@@ -42,6 +53,17 @@ urlpatterns = [
     re_path(r'profiles?/', include('profiles.urls')),
     path('api/tweets/', include('tweets.api.urls')),
     re_path(r'api/profiles?/', include('profiles.api.urls')),
+=======
+    #Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+    #path('',include(tweets.urls)),
+    path('',home_view),
+    #path('abc/',home_view),
+    path('tweets/',Tweet_LIstView),
+    path('create-tweet/',tweet_create_view),
+    path('tweets/<int:tweet_id>',tweet_Detail_view),
+    path('api/tweets/action',tweet_action_view),
+    path('api/tweets/<int:tweet_id>/delete/',tweet_delete_view),
+>>>>>>> bb8adc725cc29a5ab85a0d2219a704e0efe8bd24
 ]
 
 if settings.DEBUG:
